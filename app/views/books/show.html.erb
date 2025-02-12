@@ -1,0 +1,23 @@
+<div class="container mx-auto">
+  <div class="bg-white shadow-md rounded-lg overflow-hidden max-w-lg mx-auto">
+    <% if @book.image.attached? %>
+      <img class="w-full h-64 object-cover" src="<%= url_for(@book.image) %>" alt="<%= @book.title %>">
+    <% else %>
+      <img class="w-full h-64 object-cover" src="/path_to_default_image.jpg" alt="Default Book Cover">
+    <% end %>
+    <div class="p-4">
+      <h1 class="text-2xl font-bold mb-4"><%= @book.title %></h1>
+      <p class="text-gray-700 mb-2">Author: <%= @book.author %></p>
+      <p class="text-gray-700 mb-2">ISBN: <%= @book.isbn %></p>
+      
+      <!-- Display book status -->
+      <% if @book.borrowed %>
+        <p class="text-red-500 font-bold">Status: Borrowed</p>
+      <% else %>
+        <p class="text-green-500 font-bold">Status: Available</p>
+      <% end %>
+
+      <%= link_to 'Back to Books', books_path, class: 'mt-4 inline-block px-4 py-2 bg-gray-500 text-white rounded' %>
+    </div>
+  </div>
+</div>
