@@ -5,16 +5,16 @@
 <% end %>
 
 <!-- New Section for Member's Community -->
-<div class="container mx-auto max-w-9xl px-4 sm:px-6 lg:px-8 mt-10 ml-7">
+<div class="container mx-auto max-w-9xl px-4 sm:px-6 lg:px-8 mt-10 ml-9">
   <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg">
     <div class="flex items-center">
       <!-- Book Cover Image -->
       <div class="w-1/3">
-        <img src="/public/book.PNG" alt="Imagine Book Cover" class="rounded-lg shadow-lg">
+        <img src="/beatiful.webp" alt="Imagine Book Cover" class="rounded-lg shadow-lg"> 
       </div>
       <!-- Text Content -->
       <div class="w-2/3 pl-8">
-        <h2 class="text-3xl font-bold mb-4"> BOOKS4LENDING </h2>
+        <h2 class="text-3xl font-bold mb-4">BOOKS4LENDING</h2>
         <p class="mb-4">Join the Tribe, Borrow and lend books</p>
         <a href="#about-site" class="inline-block bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">READ MORE</a>
       </div>
@@ -22,27 +22,41 @@
   </div>
 </div>
 
+<!-- Books Collection Section -->
 <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
   <div class="py-8">
     <h1 class="text-3xl font-bold text-center mb-8">Books Collection</h1>
-    <!-- Horizontal Scroll Container -->
-    <div class="overflow-x-auto ml-8">
-      <!-- Flex Container for Books -->
-      <div class="flex gap-10" style="min-width: max-content;"> <!-- Increased gap to 10 -->
-        <% @books.first(5).each do |book| %> <!-- Limit to 5 books -->
-          <!-- Individual Book Card -->
+    
+    <!-- Top Row: First 5 Books -->
+    <div class="overflow-x-auto ml-10">
+      <div class="flex gap-10" style="min-width: max-content;">
+        <% @books.first(5).each do |book| %>
           <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white ">
-            <!-- Image Section -->
             <img class="w-full" src="<%= book.image.attached? ? url_for(book.image) : '/path_to_default_image.jpg' %>" alt="<%= book.title %>">
-            
-            <!-- Book Info Section -->
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2"><%= book.title %></div>
               <p class="text-gray-700 text-base">Author: <%= book.author %></p>
               <p class="text-gray-700 text-base">ISBN: <%= book.isbn %></p>
             </div>
-            
-            <!-- Book Status and View Details Button -->
+            <div class="px-6 pt-4 pb-2">
+              <%= link_to 'View Details', book_path(book), class: 'inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Next 5 Books -->
+    <div class="overflow-x-auto ml-8 mt-8">
+      <div class="flex gap-10" style="min-width: max-content;">
+        <% @books.offset(5).first(5).each do |book| %>
+          <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white ">
+            <img class="w-full" src="<%= book.image.attached? ? url_for(book.image) : '/path_to_default_image.jpg' %>" alt="<%= book.title %>">
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2"><%= book.title %></div>
+              <p class="text-gray-700 text-base">Author: <%= book.author %></p>
+              <p class="text-gray-700 text-base">ISBN: <%= book.isbn %></p>
+            </div>
             <div class="px-6 pt-4 pb-2">
               <%= link_to 'View Details', book_path(book), class: 'inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600' %>
             </div>
