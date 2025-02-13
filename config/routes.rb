@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
  end
   
+
   # Static home page
   root to: "home#index"
   
@@ -15,11 +16,11 @@ Rails.application.routes.draw do
   # Book routes with full CRUD actions (index, show, new, create, etc.)
   resources :books do
     member do
-      post 'borrow'
-      post 'return'
+      get 'borrow' # For showing the borrowing page
+      post 'confirm_borrow' # For confirming and setting return date
+      get 'return' # For returning the book
     end
   end
-
   # Health check
   get "up", to: "rails/health#show", as: :rails_health_check
 

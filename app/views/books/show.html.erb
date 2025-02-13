@@ -11,10 +11,24 @@
       <p class="text-gray-700 mb-2">ISBN: <%= @book.isbn %></p>
       
       <!-- Display book status -->
-      <% if @book.borrowed %>
-        <p class="text-red-500 font-bold">Status: Borrowed</p>
+      <% if @book.borrowed? %>
+        <p class="text-red-500 font-bold">Status: Borrowed by <%= @book.user.name %></p>
       <% else %>
         <p class="text-green-500 font-bold">Status: Available</p>
+      <% end %>
+
+      <!-- Borrow or Return Buttons -->
+      <% if user_signed_in? %>
+        <% if @book.borrowed? && @book.user == current_user %>
+        <%= link_to 'Return Book', return_book_path(@book),
+         method: :post, class: 'mt-4 inline-block px-4 py-2 bg-red-500 text-white rounded' %>
+        <% elsif !@book.borrowed? %>
+          <!-- Borrow button now links to the borrow form page -->
+          <%= link_to 'Borrow Book', borrow_book_path(@book), class: 'mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded' %>
+        <% end %> <!-- This end was missing -->
+      <% else %>
+        <p class="text-gray-500">You must be logged in to borrow this book.</p>
+        <%= link_to 'Log in', new_user_session_path, class: 'mt-2 inline-block px-4 py-2 bg-green-500 text-white rounded' %>
       <% end %>
 
       <%= link_to 'Back to Books', books_path, class: 'mt-4 inline-block px-4 py-2 bg-gray-500 text-white rounded' %>

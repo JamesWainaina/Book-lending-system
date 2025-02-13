@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_12_170832) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_13_153519) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_12_170832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "borrowed"
+    t.integer "user_id"
+    t.date "return_date"
+    t.date "due_date"
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,4 +67,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_12_170832) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "books", "users"
 end

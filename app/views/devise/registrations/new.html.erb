@@ -2,14 +2,13 @@
   <h2 class="text-center text-2xl font-bold text-gray-700 mb-6">Sign up</h2>
   <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-200 mt-3">
     <div class="w-full max-w-xs">
-
       <!-- Name Field -->
       <div class="mb-4">
         <%= f.label :name, "Name", class: "block text-gray-700 text-sm font-bold mb-2" %>
         <%= f.text_field :name, placeholder: "John Doe", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", required: true %>
       </div>
       
-      <!-- Name Field -->
+      <!-- Email Field -->
       <div class="mb-4">
         <%= f.label :email, "Email", class: "block text-gray-700 text-sm font-bold mb-2" %>
         <%= f.text_field :email, placeholder: "john@gmail.com", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", required: true %>

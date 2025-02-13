@@ -1,13 +1,13 @@
-<h1 class="text-3xl font-bold mb-6">Book Collection</h1>
+<h1 class="text-3xl font-bold mb-6 text-center">Book Collection</h1>
 <br/>
 <div class="flex justify-between mb-6">
   <div></div>
   <!-- Button to add a new book -->
-  <%= link_to 'Add New Book', new_book_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Add New Book', new_book_path, class: 'btn bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600' %>
 </div>
 
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ml-6">
   <% @books.each do |book| %>
     <div class="bg-white rounded-lg shadow-md p-4">
       <% if book.image.attached? %>
@@ -21,7 +21,8 @@
       <p class="text-gray-500">ISBN: <%= book.isbn %></p>
 
       <div class="mt-4">
-        <%= link_to 'View Details', book_path(book), class: 'inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600' %>
+      <%= link_to 'View Details', book_path(book), class: 'btn bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600' %>
+
       </div>
     </div>
   <% end %>

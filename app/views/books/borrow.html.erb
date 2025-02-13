@@ -1,0 +1,15 @@
+<!-- app/views/books/borrow.html.erb -->
+<div class="container mx-auto">
+  <div class="bg-white shadow-md rounded-lg overflow-hidden max-w-lg mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Borrow <%= @book.title %></h1>
+
+    <%= form_with url: confirm_borrow_book_path(@book), method: :post do |f| %>
+      <div class="mb-4">
+        <%= f.label :return_date, "Set a return date:" %>
+        <%= f.date_field :return_date, class: 'form-input mt-1 block w-full', max: (Date.today + 14.days).to_s %>
+      </div>
+
+      <%= f.submit "Confirm Borrowing", class: "px-4 py-2 bg-blue-500 text-white rounded mt-3" %>
+    <% end %>
+  </div>
+</div>

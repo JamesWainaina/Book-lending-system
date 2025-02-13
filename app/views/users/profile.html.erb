@@ -1,1 +1,73 @@
-<h1> Users profile <h1/>
+<div class="max-w-2xl mx-auto my-10 bg-white p-8 rounded-lg shadow-lg">
+  <h2 class="text-3xl font-semibold text-center mb-6">Edit Profile</h2>
+
+  <%= form_for(current_user, url: user_registration_path, html: { method: :put, enctype: "multipart/form-data", class: "space-y-6" }) do |f| %>
+
+    <!-- Name Field -->
+    <div>
+      <%= f.label :name, "Name", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.text_field :name, class: "block w-full p-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500", required: true %>
+    </div>
+
+    <!-- Profile Picture Field -->
+    <div>
+      <%= f.label :profile_picture, "Profile Picture", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.file_field :profile_picture, class: "block w-full p-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      <% if current_user.profile_picture.attached? %>
+        <img src="<%= url_for(current_user.profile_picture) %>" alt="Profile picture" class="w-32 h-32 mt-4 rounded-full">
+      <% end %>
+    </div>
+
+    <!-- Password Field -->
+    <div>
+      <%= f.label :password, "New Password", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.password_field :password, class: "block w-full p-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500", autocomplete: "new-password" %>
+      <small class="text-gray-500">Leave blank if you don't want to change your password</small>
+    </div>
+
+    <!-- Password Confirmation Field -->
+    <div>
+      <%= f.label :password_confirmation, "Confirm New Password", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.password_field :password_confirmation, class: "block w-full p-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500", autocomplete: "new-password" %>
+    </div>
+
+    <!-- Current Password Field (Required to confirm changes) -->
+    <div>
+      <%= f.label :current_password, "Current Password", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.password_field :current_password, class: "block w-full p-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500", autocomplete: "current-password", required: true %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <%= f.submit "Update Profile", class: "w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600" %>
+    </div>
+
+  <% end %>
+
+  <!-- Borrowed Books Section -->
+  <div class="mt-10">
+    <h2 class="text-2xl font-semibold text-center mb-6">Currently Borrowed Books</h2>
+    
+    <% if current_user.books.any? %>
+      <div class="space-y-6">
+        <% current_user.books.each do |book| %>
+          <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-lg font-semibold"><%= book.title %></p>
+                <p class="text-sm text-gray-600">Author: <%= book.author %></p>
+              </div>
+              
+              <!-- Return Book Button -->
+              <div>
+                <%= link_to 'Return Book', return_book_path(book), method: :post, class: "bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-center text-gray-600">You haven't borrowed any books.</p>
+    <% end %>
+  </div>
+</div>
