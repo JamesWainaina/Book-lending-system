@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   # User authentication routes (Devise or default Rails auth)
   devise_for :users
+
+  devise_scope :user do  
+    get '/users/sign_out' => 'devise/sessions#destroy'     
+ end
   
   # Static home page
   root to: "home#index"
