@@ -3,6 +3,11 @@ class Book < ApplicationRecord
 
     belongs_to :user, optional: true
 
+    validates :title, presence: true
+    validates :author, presence: true
+    validates :isbn, presence: true, uniqueness: { message: "has already been taken"}
+
+
     def borrowed?
         self.user.present?
     end

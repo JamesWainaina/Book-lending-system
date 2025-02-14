@@ -64,6 +64,10 @@ group :test do
   gem "selenium-webdriver"
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
 
 
 gem "tailwindcss-rails", "~> 4.0"
