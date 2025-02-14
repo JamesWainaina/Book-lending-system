@@ -14,25 +14,31 @@ class BooksController < ApplicationController
   def borrow
     @book = Book.find(params[:id])
 
+    puts "Is the book borrowed? #{@book.borrowed?}"
+
     if @book.borrowed?
       redirect_to @book, alert: "This book is already borrowed."
     end
   end
 
-  # Handle the submission of the borrowing form
   def confirm_borrow
     @book = Book.find(params[:id])
 
+  
     if @book.borrowed?
       redirect_to @book, alert: "This book is already borrowed."
     else
-      if @book.update(user: current_user, return_date: params[:return_date])
-        redirect_to @book, notice: "You have successfully borrowed the book."
+      # Automatically set the return date to 14 days from today
+      return_date = Date.today + 14.days
+  
+      if @book.update(user: current_user, return_date: return_date)
+        redirect_to @book, notice: "You have successfully borrowed the book. Return it by #{return_date}."
       else
         redirect_to @book, alert: "Failed to borrow the book. Please try again."
       end
     end
   end
+  
 
   # Handle returning the book
   def return

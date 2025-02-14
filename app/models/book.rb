@@ -9,6 +9,6 @@ class Book < ApplicationRecord
 
 
     def borrowed?
-        self.user.present?
+        user.present?
     end
 end
