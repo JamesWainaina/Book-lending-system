@@ -25,7 +25,7 @@ The **Library Management System** is a web application built using Ruby on Rails
 - **Authentication**: Devise
 - **File Attachments**: Active Storage
 - **Database**: Sqlite
-- **Testing**: RSpec, FactoryBot
+- **Testing**: RSpec, capybara, FactoryBot
 
 ## Setup Instructions
 
