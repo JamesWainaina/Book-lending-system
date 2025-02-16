@@ -71,4 +71,5 @@ The **Library Management System** is a web application built using Ruby on Rails
 5. **Running Tests**
     ```
     bundle exec rspec
+    rails test
     ```
