@@ -41,7 +41,7 @@ The **Library Management System** is a web application built using Ruby on Rails
 
    ```bash
    git clone https://github.com/JamesWainaina/Book-lending-system.git
-   cd library-management-system
+   cd Book-lending-system
    ```
 
 2.  **Install the required gems:**
